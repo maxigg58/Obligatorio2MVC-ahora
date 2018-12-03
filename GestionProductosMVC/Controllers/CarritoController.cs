@@ -137,7 +137,7 @@ namespace GestionProductosMVC.Controllers
                         }
                         else
                         {
-                            ViewBag.Error = "La cantidad debe ser mayor a 0";
+                            return RedirectToAction("CantidadError");
                         }
                     }
 
@@ -173,9 +173,10 @@ namespace GestionProductosMVC.Controllers
 
                             }
                             else
-                                ViewBag.Error = "prueba";
+                                return RedirectToAction("CantidadError");
 
                         }
+                        
                         else
                         {
                             return RedirectToAction("ErrorProducto");
