@@ -200,6 +200,118 @@ namespace GestionProductosMVC.Controllers
             return View(products.ToList());
         }
 
+        public ActionResult ProductoYaIngresado()
+        {
+            return View();
+        }
+        public ActionResult ProductoIngresadoConExito()
+        {
+            return View();
+        }
+        public ActionResult agregarProdaCarrito(int id)
+        {
+            int usuariologueado = ((int)Session["Usuario"]);
+            int ocvariableSession = ((int)Session["Carrito"]);
+            int ItemsenCarrito = ((int)Session["CountElementosCarrito"]);
+
+
+            DateTime fecha = DateTime.Now;
+
+            try
+            {
+                using (MiContextoContext db = new MiContextoContext())
+                {
+
+
+                    Producto prodSeleccionado = new Producto();
+                    Cliente unc = new Cliente();
+                    Carrito uncarrito = new Carrito();
+                    prodSeleccionado = db.Productoes.Find(id);
+                    unc = db.Clientes.Find(usuariologueado);
+
+                    if (ocvariableSession == 0 && prodSeleccionado != null && unc != null)
+                    {
+
+
+                        var random = new Random();
+                        int OrdenCompra = random.Next(1000, 9999);
+
+                        uncarrito.cliente = unc;
+                        uncarrito.producto = prodSeleccionado;
+                        uncarrito.cantidad = 1;
+
+                    
+                        uncarrito.fechaRegistro = fecha;
+                        uncarrito.OrdenDeCompra = OrdenCompra;
+                        uncarrito.Venta = false;
+                        Session["Carrito"] = OrdenCompra;
+
+                        if (uncarrito.OrdenDeCompra != 0 && uncarrito.cliente.idUsuario != 0)
+                        {
+
+
+                            db.Carritos.Add(uncarrito);
+                            db.SaveChanges();
+
+                            Session["CountElementosCarrito"] = ItemsenCarrito + 1;
+
+                            return RedirectToAction("ProductoIngresadoConExito");
+                        }
+
+
+                    }
+                    else if (prodSeleccionado != null)
+                    {
+
+                        var existeProducto = db.Carritos.Where(x => x.Venta == false && x.producto.idProducto == id && x.cliente.idUsuario == usuariologueado).ToList();
+
+                        if (existeProducto.Count() == 0)
+                        {
+
+
+                            uncarrito.cliente = unc;
+                            uncarrito.producto = prodSeleccionado;
+                            uncarrito.cantidad = 1;
+                            // vm.Orden.producto.idProducto = prodSeleccionado.idProducto;
+                            //  vm.Orden.cliente.idUsuario = usuariologueado;
+                            //  vm.Orden.producto.Costo = prodSeleccionado.PrecioVenta;
+                            uncarrito.fechaRegistro = fecha;
+                            //  vm.Orden.producto.NombreProducto = prodSeleccionado.NombreProducto;
+                            uncarrito.Venta = false;
+                            uncarrito.OrdenDeCompra = ocvariableSession;
+
+
+                                db.Carritos.Add(uncarrito);
+                                db.SaveChanges();
+                         
+                                Session["CountElementosCarrito"] = ItemsenCarrito + 1;
+
+                            return RedirectToAction("ProductoIngresadoConExito");
+
+                        }
+
+                        else
+                        {
+                            return RedirectToAction("ProductoYaIngresado");
+                        }
+
+                    }
+
+
+                }
+                //
+
+            }
+            catch
+            {
+
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

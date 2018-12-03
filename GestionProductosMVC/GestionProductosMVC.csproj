@@ -337,6 +337,8 @@
     <Content Include="Views\Home\CargarProductos.cshtml" />
     <Content Include="Views\Home\DatosCargados.cshtml" />
     <Content Include="Views\Carrito\CantidadError.cshtml" />
+    <Content Include="Views\Productoes\ProductoYaIngresado.cshtml" />
+    <Content Include="Views\Productoes\ProductoIngresadoConExito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -89,7 +89,12 @@
                         @Html.ActionLink("Editar Precio de Venta", "Edit", new { id = item.idProducto })
                     }
 
-                    || @Html.ActionLink("Detalle del Producto", "Details", new { id = item.idProducto }) |
+                    || @Html.ActionLink("Detalle del Producto", "Details", new { id = item.idProducto })  ||
+                    @Html.ActionLink("Agregar a Carrito", "agregarProdaCarrito", new { id = item.idProducto })
+
+
+                    
+
 
                 </td>
             </tr>
@@ -99,5 +104,6 @@
         }
 
     </table>
+    <div>@ViewBag.mensaje</div>
 }
 

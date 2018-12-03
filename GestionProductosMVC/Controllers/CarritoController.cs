@@ -176,7 +176,7 @@ namespace GestionProductosMVC.Controllers
                                 return RedirectToAction("CantidadError");
 
                         }
-                        
+
                         else
                         {
                             return RedirectToAction("ErrorProducto");
@@ -246,13 +246,35 @@ namespace GestionProductosMVC.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Carrito orden)
         {
-            if (ModelState.IsValid)
+            if (orden.cantidad > 0 && id != 0)
             {
-                db.Entry(orden).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+                Carrito miCarrito = db.Carritos.Find(id);
+                if (miCarrito != null)
+                {
+
+
+                    orden.cliente = miCarrito.cliente;
+                    orden.fechaRegistro = miCarrito.fechaRegistro;
+                    orden.idSolicitud = miCarrito.idSolicitud;
+                    orden.OrdenDeCompra = miCarrito.OrdenDeCompra;
+                    orden.producto = miCarrito.producto;
+                    orden.Venta = miCarrito.Venta;
+
+                    db.Carritos.Remove(miCarrito);
+                    db.SaveChanges();
+                    db.Carritos.Add(orden);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
             }
-            return View(orden);
+            else
+            {
+                return RedirectToAction("CantidadError");
+            }
+            return View();
         }
 
         // GET: Carrito/Delete/5
@@ -305,28 +327,37 @@ namespace GestionProductosMVC.Controllers
                 Pedido nuevoP = new Pedido();
                 int monto = 0;
 
-                foreach (var OcCarrito in MiCarrito)
-                {
-                    if (OcCarrito.OrdenDeCompra == id && OcCarrito.Venta == false && OcCarrito.cliente.idUsuario == usuariologueado)
-                    {
-                        monto = monto + (OcCarrito.producto.Costo * OcCarrito.cantidad);
-                        nuevoP.idCliente = OcCarrito.cliente.idUsuario;
-                        nuevoP.idOrdenCompra = OcCarrito.OrdenDeCompra;
-                        nuevoP.fecha = OcCarrito.fechaRegistro;
-                        nuevoP.totalPedido = monto;
-                        //   db.Carritos.Remove(OcCarrito);
-                        //  db.SaveChanges();
-                        OcCarrito.Venta = true;
-                        db.Entry(OcCarrito).State = EntityState.Modified;
-                        //  db.Carritos.Add(OcCarrito);
-                        db.SaveChanges();
-                    }
-                }
-                db.Pedidos.Add(nuevoP);
-                db.SaveChanges();
-                Session["Carrito"] = 0;
-                Session["CountElementosCarrito"] = 0;
 
+                if (MiCarrito != null)
+                {
+
+                    foreach (var OcCarrito in MiCarrito)
+                    {
+                        if (OcCarrito.OrdenDeCompra == id && OcCarrito.Venta == false && OcCarrito.cliente.idUsuario == usuariologueado)
+                        {
+                            monto = monto + (OcCarrito.producto.PrecioVenta * OcCarrito.cantidad);
+                            nuevoP.idCliente = OcCarrito.cliente.idUsuario;
+                            nuevoP.idOrdenCompra = OcCarrito.OrdenDeCompra;
+                            nuevoP.fecha = OcCarrito.fechaRegistro;
+                            nuevoP.totalPedido = monto;
+                            //   db.Carritos.Remove(OcCarrito);
+                            //  db.SaveChanges();
+                            OcCarrito.Venta = true;
+                            db.Entry(OcCarrito).State = EntityState.Modified;
+                            //  db.Carritos.Add(OcCarrito);
+                            db.SaveChanges();
+                        }
+                    }
+                    db.Pedidos.Add(nuevoP);
+                    db.SaveChanges();
+                    Session["Carrito"] = 0;
+                    Session["CountElementosCarrito"] = 0;
+
+                }
+                else
+                {
+                    ViewBag.error = "No existen datos en el carrito";
+                }
             }
 
             return RedirectToAction("Index");
