@@ -38,6 +38,11 @@ namespace GestionProductosMVC.Controllers
         {
             return View();
         }
+        public ActionResult AvisoUsuIncorrecto()
+        {
+            return View();
+        }
+      
 
         public ActionResult CargarProductos()
         {
@@ -123,7 +128,7 @@ namespace GestionProductosMVC.Controllers
                         }
 
                     }
-                    return RedirectToAction("CargarProductos", "Home");
+                    return View();
                 }
 
             }
