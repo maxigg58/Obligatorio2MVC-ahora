@@ -1,0 +1,8 @@
+1|PcGamer|Pc de alto rendimiento|2548|3598|Importado|China|12|12
+2|Telefonos|Telefonos bajo costo|12324|12579789|Importado|China|789|789
+3|Impresoras|Impresoras Laser multifuncion|54879|1202547|Importado|Canada|500|500
+4|Laptops|Laptos Armadas por partes|547|800|Fabricado|---|12|*
+5|Relojes digitales|Reloj digital buena calidad|450|2598|Fabricado|---|5|*
+6|Televisores|Televisores Encargue panavox|154|12587|Fabricado|---|3|*
+7|Prueba|Esto es una Prueba|123|2345|Importado|Argentina|12|12
+8|DefensaP|Defensa|1234|23212|Fabricado|---|2|*

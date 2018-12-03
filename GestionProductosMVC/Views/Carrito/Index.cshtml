@@ -1,0 +1,75 @@
+﻿@model IEnumerable<GestionProductosMVC.Models.Carrito>
+
+@{
+    ViewBag.Title = "Carrito de compras";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Agregar producto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.producto.NombreProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDeCompra)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.producto.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenDeCompra)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idSolicitud }) |
+                @Html.ActionLink("Detalle", "Details", new { id = item.idSolicitud }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.idSolicitud })
+            </td>
+        </tr>
+    }
+   
+
+</table>
+@{
+
+
+
+    int oc = 0;
+
+
+    foreach (var item in Model)
+    {
+        if (item.OrdenDeCompra != 0)
+        {
+            oc = item.OrdenDeCompra;
+            break;
+        }
+
+        oc = 0;
+    }
+    <div>
+        @Html.ActionLink("Confirmar Compra", "ConfirmarCompra", new { id = oc })
+    </div>
+
+}

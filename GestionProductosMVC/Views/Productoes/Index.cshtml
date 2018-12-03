@@ -1,0 +1,103 @@
+﻿@model IEnumerable<GestionProductosMVC.Models.Producto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Productos</h2>
+@using (Html.BeginForm())
+{   <table class="table">
+        <tr>
+            <td>
+                <p class="col-md-10">
+                    Ingrese el filtro deseado:
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Codigo del Producto</label> @Html.TextBox("Codigo")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Nombre Producto</label>   @Html.TextBox("Nombre")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Desc Producto</label>   @Html.TextBox("Descripcion")
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <label>Rango de Precios___ </label><label> desde: </label> @Html.TextBox("Rdesde") <label> hasta: </label>@Html.TextBox("Rhasta")
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <label>Tipo</label>@Html.TextBox("Tipo")
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <input type="submit" value="Filtrar" />
+            </td>
+        </tr>
+    </table>
+}
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioVentaSugerido)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioVenta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioVentaSugerido)
+                </td>
+                <td>
+                    @if ((int)Session["UsuLogeado"] == 0)
+                    {
+                        @Html.ActionLink("Editar Precio de Venta", "Edit", new { id = item.idProducto })
+                    }
+
+                    || @Html.ActionLink("Detalle del Producto", "Details", new { id = item.idProducto }) |
+
+                </td>
+            </tr>
+
+
+
+        }
+
+    </table>
+}
+

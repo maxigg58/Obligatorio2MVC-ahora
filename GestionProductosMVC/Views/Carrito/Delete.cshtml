@@ -1,0 +1,55 @@
+﻿@model GestionProductosMVC.Models.Carrito
+
+@{
+    ViewBag.Title = "Eliminar producto de la orden";
+}
+
+<h2>Delete</h2>
+
+<h3>Esta seguro que quiere eliminar la orden del carrito?</h3>
+<div>
+    <h4>Carrito</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.producto.NombreProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto.NombreProducto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producto.PrecioVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto.PrecioVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaRegistro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Visualizar Lista", "Index")
+        </div>
+    }
+</div>

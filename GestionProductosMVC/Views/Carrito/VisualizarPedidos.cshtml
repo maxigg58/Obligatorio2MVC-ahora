@@ -1,0 +1,131 @@
+﻿@model IEnumerable<GestionProductosMVC.ViewModels.VerPedidosViewModel>
+
+@{
+    ViewBag.Title = "Visualizar Pedidos";
+}
+
+<h2>VisualizarPedidos</h2>
+
+<p>
+
+</p>
+
+<div>
+
+    <h2>Detalle Pedidos:</h2>
+
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+
+
+            <th></th>
+        </tr>
+
+        @{
+
+            int OcAnterior = 0;
+
+            foreach (var item in Model)
+            {
+
+
+                if (item.OC != OcAnterior)
+                {
+                    OcAnterior = item.OC;
+
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+
+
+                    </tr>
+
+                }
+            }
+        }
+    </table>
+</div>
+
+<br>
+<br>
+<br>
+<div>
+    
+        <h2>Detalle Articulos por pedido:</h2>
+   
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unidades)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioProd)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodProd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidades)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioProd)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+    <p>
+        @Html.ActionLink("Agregar Productos al Carrito", "Create")
+    </p>
+    </div>

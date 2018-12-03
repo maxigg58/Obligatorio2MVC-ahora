@@ -1,0 +1,149 @@
+﻿@model GestionProductosMVC.Models.Producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @if (Model.tipoProducto == "Importado")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </dt>
+
+            <dd>
+
+                @Html.DisplayFor(model => model.NombreProducto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Costo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Costo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioVenta)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PrecioVenta)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioVentaSugerido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PrecioVentaSugerido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoProducto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tipoProducto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PaisOrigen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PaisOrigen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CantMinimaAPedir)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CantMinimaAPedir)
+            </dd>
+
+
+        }
+        @if (Model.tipoProducto == "Fabricado")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </dt>
+
+            <dd>
+
+                @Html.DisplayFor(model => model.NombreProducto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Costo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Costo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioVenta)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PrecioVenta)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioVentaSugerido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PrecioVentaSugerido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoProducto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tipoProducto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TiempoPreviso)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TiempoPreviso)
+            </dd>
+        }
+
+
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Volver", "Index")
+</p>
